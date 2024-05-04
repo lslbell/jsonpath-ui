@@ -4,6 +4,8 @@ An instructive UI for JsonPath.
 
 Click on the fields to generate a simple JsonPath.
 
+![img.png](public/screen-shot.png)
+
 Todo:
  - add filters
  - add high-level language filters
