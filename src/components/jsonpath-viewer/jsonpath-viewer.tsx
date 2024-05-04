@@ -39,7 +39,6 @@ export const JsonpathViewer = () => {
     const getJsonPath = (line: number, value: any) => {
         let paths = [] as any;
         buildJsonPathFromLine(line, value, "$", paths, 0, line);
-        console.log(paths)
         return paths[line - 2];
     }
 

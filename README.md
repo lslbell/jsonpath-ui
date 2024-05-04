@@ -1,3 +1,15 @@
+# Jsonpath UI
+
+An instructive UI for JsonPath.
+
+Click on the fields to generate a simple JsonPath.
+
+Todo:
+ - add filters
+ - add high-level language filters
+
+------------
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
