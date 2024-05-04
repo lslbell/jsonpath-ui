@@ -6,7 +6,7 @@ export const JsonpathViewer = () => {
     const [value, setValue] = useState<any>(jsonExample);
     const [line, setLine] = useState<number>(0);
     const [jsonPath, setJsonPath] = useState<string>("");
-
+console.log(value)
     const ammendPath = (key: string, ref: string) => {
         return ref += "['" + key + "']";
     }

@@ -22,9 +22,11 @@ export const MonacoEditor = (props: {
         }
     }
 
-    const handleChange = (e: any, editor: any) => {
+    const handleChange = (value: any, e: any) => {
         try {
-            let jsonData = JSON.parse(editor.getValue());
+            console.log("in monaco")
+            console.log(value)
+            let jsonData = JSON.parse(value);
             props.setValue(jsonData);
         } catch (error) {
             console.error("Failed to parse JSON: ", error);
