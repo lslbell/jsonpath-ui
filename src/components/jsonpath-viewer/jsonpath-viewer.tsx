@@ -11,26 +11,25 @@ export const JsonpathViewer = () => {
         return ref += "['" + key + "']";
     }
 
-    const buildJsonPathFromLine = (
-        line: number,
+    const buildJsonPaths = (
         json: any,
-        pathRef: string,
+        path: string,
         paths: any[],
         count: number,
         countTarget: number
     ) => {
         for (let key in json) {
-            let tempRef = pathRef;
+            let pathAmmended = path;
             if (json[key] && typeof json[key] === "object") {
-                tempRef = ammendPath(key, tempRef);
-                paths.push(tempRef);
+                pathAmmended = ammendPath(key, pathAmmended);
+                paths.push(pathAmmended);
                 if (Object.keys(json[key]).length > 0 ||
                     (Array.isArray(json[key]) && json[key].length > 0)) {
-                    buildJsonPathFromLine(line, json[key], tempRef, paths, count + 1, countTarget);
+                    buildJsonPaths(json[key], pathAmmended, paths, count + 1, countTarget);
                 }
             } else {
-                tempRef = ammendPath(key, tempRef);
-                paths.push(tempRef);
+                pathAmmended = ammendPath(key, pathAmmended);
+                paths.push(pathAmmended);
             }
         }
         paths.push("");
@@ -38,7 +37,7 @@ export const JsonpathViewer = () => {
 
     const getJsonPath = (line: number, value: any) => {
         let paths = [] as any;
-        buildJsonPathFromLine(line, value, "$", paths, 0, line);
+        buildJsonPaths(value, "$", paths, 0, line);
         return paths[line - 2];
     }
 
