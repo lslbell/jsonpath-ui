@@ -6,17 +6,26 @@ export const JsonpathViewer = () => {
     const [value, setValue] = useState<any>(jsonExample);
     const [line, setLine] = useState<number>(0);
     const [jsonPath, setJsonPath] = useState<string>("");
-console.log(value)
+    const [jsonPaths, setJsonPaths] = useState<string[]>([]);
+    const [filters, setFilters] = useState<string[]>();
+
+    const getFilters = () => {
+
+    }
+
     const ammendPath = (key: string, ref: string) => {
-        return ref += "['" + key + "']";
+        if (key.match(/^\d+$/)) {
+            return ref += "[" + key + "]";
+        } else {
+            return ref += "['" + key + "']";
+        }
     }
 
     const buildJsonPaths = (
         json: any,
         path: string,
         paths: any[],
-        count: number,
-        countTarget: number
+        count: number
     ) => {
         for (let key in json) {
             let pathAmmended = path;
@@ -25,7 +34,7 @@ console.log(value)
                 paths.push(pathAmmended);
                 if (Object.keys(json[key]).length > 0 ||
                     (Array.isArray(json[key]) && json[key].length > 0)) {
-                    buildJsonPaths(json[key], pathAmmended, paths, count + 1, countTarget);
+                    buildJsonPaths(json[key], pathAmmended, paths, count + 1);
                 }
             } else {
                 pathAmmended = ammendPath(key, pathAmmended);
@@ -35,18 +44,20 @@ console.log(value)
         paths.push("");
     }
 
-    const getJsonPath = (line: number, value: any) => {
-        let paths = [] as any;
-        buildJsonPaths(value, "$", paths, 0, line);
-        return paths[line - 2];
-    }
+    useEffect(() => {
+        if (value) {
+            let paths = [] as any;
+            buildJsonPaths(value, "$", paths, 0);
+            setJsonPaths(paths);
+        }
+    }, [value])
 
     useEffect(() => {
-        if (line && value) {
-            let jsonPath = getJsonPath(line, value);
+        if (line && jsonPaths) {
+            let jsonPath = jsonPaths[line - 2];
             setJsonPath(jsonPath);
         }
-    }, [line, value])
+    }, [line])
 
     return (
         <div style={{
@@ -56,6 +67,8 @@ console.log(value)
         }}>
             <div style={{
                 padding: "40px",
+                paddingTop: "20px",
+
                 margin: "auto",
                 width: "50%"
             }}>
@@ -67,7 +80,19 @@ console.log(value)
                 }}>
                     JsonPath: {jsonPath ? jsonPath : "click on a field to get the JsonPath."}
                 </p>
-
+                {
+                    filters &&
+                    filters.length > 0 &&
+                    filters.map((f) => {
+                        return (
+                            <p style={{
+                                color: "blue"
+                            }}>
+                                {f}
+                            </p>
+                        )
+                    })
+                }
                 <MonacoEditor
                     value={value}
                     setValue={setValue}

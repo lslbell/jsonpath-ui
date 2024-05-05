@@ -9,13 +9,13 @@ export const MonacoEditor = (props: {
 
     const handleEditorDidMount = (editor: any, monaco: any) => {
         try {
-            editor.onDidChangeCursorPosition((e: any) => handleMouseDown(e, editor));
+            editor.onDidChangeCursorPosition((e: any) => handleMouseDown(e));
         } catch (error) {
             console.error("Error mounting editor: ", error);
         }
     }
 
-    const handleMouseDown = (e: any, editor: any) => {
+    const handleMouseDown = (e: any) => {
         const line = e.position?.lineNumber;
         if (line) {
             props.setLine(line);
@@ -24,8 +24,6 @@ export const MonacoEditor = (props: {
 
     const handleChange = (value: any, e: any) => {
         try {
-            console.log("in monaco")
-            console.log(value)
             let jsonData = JSON.parse(value);
             props.setValue(jsonData);
         } catch (error) {

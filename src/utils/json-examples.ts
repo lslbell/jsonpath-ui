@@ -10,31 +10,21 @@ export const jsonExample = {
     },
     "array": [
         {
-            "object1": {
-                "field": true,
-                "field2": "hello",
-                "field3": 123
-            }
+            "boolean": true,
+            "message": "hello",
+            "number": -1
         },
         {
-            "object2": {
-                "field": true,
-                "field2": "hello",
-                "field3": 123
-            }
+            "boolean": false,
+            "message": "good morning",
+            "number": 100
         },
         {
-            "object3": {
-                "field": true,
-                "field2": "hello",
-                "field3": 123
-            }
-        },
-        {
-            "object4": {
-                "field": true,
-                "field2": "hello",
-                "field3": 123
+            "boolean": true,
+            "message": "goodbye",
+            "number": 3.14,
+            "object": {
+                "field": ":)"
             }
         }
     ]
