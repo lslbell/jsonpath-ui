@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
-import { jpExample } from "../../utils/json-examples";
+import { jpBooksExample } from "../../utils/json-examples";
 import { MonacoEditor } from "../monaco-editor/monaco-editor"
 
 export const JsonpathViewer = () => {
     const NUMBER_PATTERN = /^(\d+)(]){0,1}$/;
 
-    const [value, setValue] = useState<any>(jpExample);
+    const [value, setValue] = useState<any>(jpBooksExample);
     const [line, setLine] = useState<number>(0);
     const [jsonPath, setJsonPath] = useState<string>("");
     const [jsonPaths, setJsonPaths] = useState<string[]>([]);
