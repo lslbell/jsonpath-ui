@@ -7,7 +7,7 @@ export const MonacoEditor = (props: {
     setLine: Dispatch<SetStateAction<number>>,
 }) => {
 
-    const handleEditorDidMount = (editor: any, monaco: any) => {
+    const handleOnMount = (editor: any, monaco: any) => {
         try {
             editor.onDidChangeCursorPosition((e: any) => handleMouseDown(e));
         } catch (error) {
@@ -48,8 +48,6 @@ export const MonacoEditor = (props: {
                 borderBottomStyle: "solid",
                 borderBottomColor: "gray",
 
-                padding: "5px",
-
                 backgroundColor: "#f6f6f6",
 
                 borderTopLeftRadius: "7px",
@@ -70,7 +68,7 @@ export const MonacoEditor = (props: {
                     height="65vh"
                     value={JSON.stringify(props.value, null, 2)}
                     onChange={handleChange}
-                    onMount={handleEditorDidMount}
+                    onMount={handleOnMount}
                     options={{
                         minimap: {
                             enabled: false
